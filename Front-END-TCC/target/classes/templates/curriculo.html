@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Currículo do Freelancer</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Estilo do corpo */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            height: 100vh; /* Altura total da tela */
+            display: flex;
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+            overflow: hidden; /* Impede rolagem da página */
+        }
+
+        /* Container do currículo */
+        .curriculum-container {
+            max-width: 800px; /* Largura máxima do container */
+            padding: 40px 30px; /* Padding interno */
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            text-align: left; /* Alinhamento à esquerda */
+            position: relative;
+            z-index: 1;
+            overflow-y: auto; /* Permite rolagem interna */
+            max-height: 90vh; /* Altura máxima do container */
+        }
+
+        /* Títulos das seções */
+        h2 {
+            font-size: 28px; /* Tamanho do título principal */
+            color: #5f3fc9; /* Cor do título */
+            margin-bottom: 20px; /* Margem inferior */
+        }
+
+        h3 {
+            font-size: 22px; /* Tamanho do título das seções */
+            color: #333; /* Cor do título das seções */
+            margin-top: 15px; /* Margem superior */
+            margin-bottom: 10px; /* Margem inferior */
+        }
+
+        /* Estilo dos parágrafos */
+        p {
+            color: #555; /* Cor do texto */
+            font-size: 16px; /* Tamanho do texto */
+            line-height: 1.5; /* Altura da linha */
+            margin-bottom: 15px; /* Margem inferior */
+        }
+
+        /* Estilo dos botões */
+        .btn {
+            margin-top: 20px; /* Margem superior para separação */
+            padding: 10px 15px;
+            background-color: #5f3fc9; /* Cor do botão */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+        }
+
+        .btn:hover {
+            background-color: #4b2ea6; /* Cor do botão ao passar o mouse */
+            box-shadow: 0 4px 15px rgba(75, 46, 166, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left-header">
+            <img src="/img/logofree-removebg-preview.png" alt="Logo" class="logo">
+            <span class="title">Freelancer.NET</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleSidebar()">&#9776;</div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="/img/logofree-removebg-preview.png" alt="Logo" class="sidebar-logo">
+            <span class="sidebar-title">Freelancer.NET</span>
+            <div class="menu-toggle" onclick="toggleSidebar()">&#10006;</div>
+        </div>
+        <div class="menu-item">Início</div>
+        <div class="menu-item">Meus Serviços</div>
+        <div class="menu-item">Meus Currículos</div>
+        <div class="menu-item">Ajustes</div>
+        <div class="help-link">Ajuda</div>
+    </div>
+    <div class="background-shapes">
+        <div class="top-right-amoeba"></div>
+        <div class="bottom-left-amoeba"></div>
+    </div>
+    <div class="curriculum-container">
+        <h2>Currículo de <span th:text="${curriculum.freelancerName}">Nome do Freelancer</span></h2>
+
+        <section>
+            <h3>Qualificações</h3>
+            <p th:text="${curriculum.qualificacoes}">Exemplo de qualificação</p>
+        </section>
+
+        <section>
+            <h3>Experiências</h3>
+            <p th:text="${curriculum.experiencias}">Exemplo de experiência profissional</p>
+        </section>
+
+        <section>
+            <h3>Habilidades</h3>
+            <p th:text="${curriculum.habilidades}">Exemplo de habilidades</p>
+        </section>
+
+        <a th:href="@{/editar-curriculo/{freelancerId}(freelancerId=${curriculum.freelancerId})}" class="btn">Editar Currículo</a>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

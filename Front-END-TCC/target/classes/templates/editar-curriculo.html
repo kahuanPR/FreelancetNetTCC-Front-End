@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Currículo</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Estilo do corpo */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            height: 100vh; /* Altura total da tela */
+            display: flex;
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+        }
+
+        /* Container de edição do currículo */
+        .curriculum-edit-container {
+            max-width: 600px; /* Largura máxima do container */
+            padding: 40px 30px; /* Padding interno */
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            text-align: left; /* Alinhamento à esquerda */
+        }
+
+        /* Títulos */
+        h2 {
+            font-size: 28px; /* Tamanho do título */
+            color: #5f3fc9; /* Cor do título */
+            margin-bottom: 20px; /* Margem inferior */
+        }
+
+        /* Estilo dos rótulos */
+        label {
+            font-size: 16px; /* Tamanho da fonte */
+            margin-bottom: 5px; /* Margem inferior */
+            display: block; /* Exibe como bloco */
+            color: #333; /* Cor do texto */
+        }
+
+        /* Estilo das áreas de texto */
+        textarea {
+            width: 100%; /* Largura total */
+            height: 100px; /* Altura da área de texto */
+            padding: 10px; /* Padding interno */
+            border: 1px solid #ccc; /* Borda */
+            border-radius: 5px; /* Bordas arredondadas */
+            margin-bottom: 20px; /* Margem inferior */
+            font-size: 16px; /* Tamanho da fonte */
+            resize: none; /* Desativa redimensionamento */
+        }
+
+        /* Estilo dos botões */
+        .btn {
+            padding: 10px 15px;
+            background-color: #5f3fc9; /* Cor do botão */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+        }
+
+        .btn:hover {
+            background-color: #4b2ea6; /* Cor do botão ao passar o mouse */
+            box-shadow: 0 4px 15px rgba(75, 46, 166, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left-header">
+            <img src="/img/logofree-removebg-preview.png" alt="Logo" class="logo">
+            <span class="title">Freelancer.NET</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleSidebar()">&#9776;</div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="/img/logofree-removebg-preview.png" alt="Logo" class="sidebar-logo">
+            <span class="sidebar-title">Freelancer.NET</span>
+            <div class="menu-toggle" onclick="toggleSidebar()">&#10006;</div>
+        </div>
+        <div class="menu-item">Início</div>
+        <div class="menu-item">Meus Serviços</div>
+        <div class="menu-item">Meus Currículos</div>
+        <div class="menu-item">Ajustes</div>
+        <div class="help-link">Ajuda</div>
+    </div>
+    <div class="background-shapes">
+        <div class="top-right-amoeba"></div>
+        <div class="bottom-left-amoeba"></div>
+    </div>
+    <div class="curriculum-edit-container">
+        <h2>Editar Currículo</h2>
+
+        <form th:action="@{/editar-curriculo/{freelancerId}(freelancerId=${curriculum.freelancerId})}" th:object="${curriculum}" method="post">
+            <label for="qualificacoes">Qualificações</label>
+            <textarea id="qualificacoes" th:field="*{qualificacoes}" required></textarea>
+
+            <label for="experiencias">Experiências</label>
+            <textarea id="experiencias" th:field="*{experiencias}" required></textarea>
+
+            <label for="habilidades">Habilidades</label>
+            <textarea id="habilidades" th:field="*{habilidades}" required></textarea>
+
+            <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

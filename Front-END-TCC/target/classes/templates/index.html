@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bem-vindo - Freelancer.NET</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Estilo para o corpo */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Cabeçalho fixo */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: rgba(250, 250, 250, 0.99);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .left-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-toggle {
+            color: black;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 25px;
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+        }
+
+        .title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+            color: #1E1E1E;
+        }
+
+        /* Barra lateral */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -300px;
+            background-color: rgba(250, 250, 250, 0.99);
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1100;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .menu-item {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 24px;
+            color: #000;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .menu-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        .help-link {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            color: #000;
+            padding: 10px 15px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: auto;
+        }
+
+        /* Estilo para centralizar e estilizar os botões */
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 0px;
+            min-height: 80vh;
+        }
+
+        .welcome-container h1 {
+            font-size: 5.0em;
+            margin-bottom: 10px;
+        }
+
+        .welcome-container p {
+            font-size: 2.0em;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: inline-flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .button-group .btn-custom {
+            font-size: 1.25em;
+            padding: 15px 30px;
+            border: 2px solid #007bff;
+            color: #007bff;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .button-group .btn-custom:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Formas de amoeba */
+        .background-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .top-right-amoeba {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(95, 63, 201, 0.25), rgba(75, 46, 166, 0.15));
+            width: 650px;
+            height: 500px;
+            border-radius: 1000px;
+            top: -90px;
+            right: -90px;
+            clip-path: polygon(5%, 80% 20%, 95% 55%, 80% 85%, 50% 95%, 20% 85%, 5% 50%, 20% 20%);
+        }
+
+        .bottom-left-amoeba {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(95, 63, 201, 0.25), rgba(75, 46, 166, 0.15));
+            width: 500px;
+            height: 500px;
+            border-radius: 100%;
+            bottom: -120px;
+            left: -180px;
+            clip-path: polygon(5%, 80% 20%, 95% 55%, 80% 85%, 50% 95%, 20% 85%, 5% 50%, 20% 20%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho fixo -->
+    <div class="header">
+        <div class="left-header">
+            <img src="/img/logofree-removebg-preview.png" alt="Logo" class="logo">
+            <span class="title">Freelancer.NET</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleSidebar()">&#9776;</div>
+    </div>
+
+    <!-- Barra lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="menu-item">Início</div>
+        <div class="menu-item">Meus Serviços</div>
+        <div class="menu-item">Meus Currículos</div>
+        <div class="menu-item">Ajustes</div>
+        <div class="help-link">Ajuda</div>
+    </div>
+
+    <!-- Formas de amoeba -->
+    <div class="background-shapes">
+        <div class="top-right-amoeba"></div>
+        <div class="bottom-left-amoeba"></div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="container welcome-container">
+        <h1>Bem-vindo!</h1>
+        <p>O que você procura?</p>
+        <div class="button-group">
+            <a href="/servicos" class="btn btn-custom">Serviços</a>
+            <a href="/contratar" class="btn btn-custom">Contratar</a>
+        </div>
+    </div>
+
+    <!-- JavaScript para ativar a barra lateral -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Freelancer - Serviços Disponíveis</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+        }
+        .dashboard-container h2 {
+            text-align: center;
+            color: #333;
+        }
+        .service-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .service-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 15px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+        .service-item h3 {
+            font-size: 18px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .service-item p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .btn-apply {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .btn-apply:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left-header">
+            <img src="/img/logofree-removebg-preview.png" alt="Logo" class="logo">
+            <span class="title">Freelancer.NET</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleSidebar()">&#9776;</div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="/img/logofree-removebg-preview.png" alt="Logo" class="sidebar-logo">
+            <span class="sidebar-title">Freelancer.NET</span>
+            <div class="menu-toggle" onclick="toggleSidebar()">&#10006;</div>
+        </div>
+        <div class="menu-item">Início</div>
+        <div class="menu-item">Meus Serviços</div>
+        <div class="menu-item">Meus Currículos</div>
+        <div class="menu-item">Ajustes</div>
+        <div class="help-link">Ajuda</div>
+    </div>
+    <div class="background-shapes">
+        <div class="top-right-amoeba"></div>
+        <div class="bottom-left-amoeba"></div>
+    </div>
+    <div class="dashboard-container">
+        <h2>Serviços Disponíveis para Freelancers</h2>
+
+        <!-- Lista de serviços -->
+        <div class="service-list" th:each="servico : ${servicos}">
+            <div class="service-item">
+                <h3 th:text="${servico.titulo}">Título do Serviço</h3>
+                <p th:text="${servico.descricao}">Descrição do serviço...</p>
+                <p><strong>Cliente:</strong> <span th:text="${servico.cliente.nome}">Nome do Cliente</span></p>
+                <p><strong>Localização:</strong> <span th:text="${servico.localizacao}">Localização do Serviço</span></p>
+                
+                <!-- Botão para aplicar ao serviço -->
+                <a th:href="@{/aplicar-servico/{id}(id=${servico.id})}" class="btn-apply">Aplicar</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
